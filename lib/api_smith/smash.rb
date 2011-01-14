@@ -1,4 +1,3 @@
-require 'rubygems'
 require 'hashie/dash'
 
 module APISmith

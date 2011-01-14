@@ -1,0 +1,17 @@
+GIT
+  remote: git://github.com/thefrontiergroup/hashie.git
+  revision: ef366e25b60955bbbf61b28febafe5c5e95b8cdc
+  specs:
+    hashie (0.4.0)
+
+GEM
+  remote: http://rubygems.org/
+  specs:
+    activesupport (3.0.3)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  activesupport
+  hashie!
