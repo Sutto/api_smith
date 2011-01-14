@@ -4,6 +4,9 @@ module APISmith
   class Base
     include HTTParty
     
+    def initialize(*)
+    end
+
     def self.endpoint(value = nil)
       define_method(:endpoint) { value }
     end
@@ -33,10 +36,16 @@ module APISmith
         request_options[type] = merged_options_for(type, options)
       end
       response = self.class.send method, full_path, request_options
-      inner_response = extract_response path, response, options
+      parsed_response = response.parsed_response
+      check_response_errors parsed_response
+      inner_response = extract_response path, parsed_response, options
       transform_response inner_response, options
     end
     
+    def check_response_errors(response)
+      # Do nothing in this version of the api
+    end
+
     def merged_options_for(type, options)
       base = send :"base_#{type}_options"
       base.merge!(send(:"#{type}_options") || {})
@@ -85,7 +94,6 @@ module APISmith
     end
     
     def extract_response(path, response, options)
-      response = response.parsed_response
       response_container = options[:response_container] || default_response_container(path, options)
       if response_container
         response_keys = Array(options[:response_container]).map(&:to_s)
@@ -98,9 +106,10 @@ module APISmith
     
     def transform_response(response, options)
       if (transformer = options[:transform])
-        response = transformer.call response
+        transformer.call response
+      else
+        Hashie::Mash.new response
       end
-      response
     end
     
     def endpoint
