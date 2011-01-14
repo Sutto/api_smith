@@ -108,7 +108,7 @@ module APISmith
       if (transformer = options[:transform])
         transformer.call response
       else
-        Hashie::Mash.new response
+        response
       end
     end
     
