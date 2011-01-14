@@ -1,17 +1,56 @@
-GIT
-  remote: git://github.com/thefrontiergroup/hashie.git
-  revision: ef366e25b60955bbbf61b28febafe5c5e95b8cdc
+PATH
+  remote: .
   specs:
-    hashie (0.4.0)
+    api_smith (0.0.1)
+      hashie
+      httparty
 
 GEM
   remote: http://rubygems.org/
   specs:
-    activesupport (3.0.3)
+    ZenTest (4.4.2)
+    addressable (2.2.2)
+    columnize (0.3.2)
+    crack (0.1.8)
+    diff-lcs (1.1.2)
+    fuubar (0.0.3)
+      rspec (~> 2.0)
+      rspec-instafail (~> 0.1.4)
+      ruby-progressbar (~> 0.0.9)
+    hashie (0.4.0)
+    httparty (0.6.1)
+      crack (= 0.1.8)
+    linecache (0.43)
+    rr (1.0.2)
+    rspec (2.4.0)
+      rspec-core (~> 2.4.0)
+      rspec-expectations (~> 2.4.0)
+      rspec-mocks (~> 2.4.0)
+    rspec-core (2.4.0)
+    rspec-expectations (2.4.0)
+      diff-lcs (~> 1.1.2)
+    rspec-instafail (0.1.5)
+    rspec-mocks (2.4.0)
+    ruby-debug (0.10.4)
+      columnize (>= 0.1)
+      ruby-debug-base (~> 0.10.4.0)
+    ruby-debug-base (0.10.4)
+      linecache (>= 0.3)
+    ruby-progressbar (0.0.9)
+    webmock (1.6.1)
+      addressable (>= 2.2.2)
+      crack (>= 0.1.7)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
-  activesupport
-  hashie!
+  ZenTest
+  api_smith!
+  fuubar
+  hashie
+  httparty
+  rr
+  rspec (~> 2.0)
+  ruby-debug
+  webmock

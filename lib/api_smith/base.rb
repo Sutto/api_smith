@@ -1,4 +1,5 @@
 require 'httparty'
+
 module APISmith
   class Base
     include HTTParty
