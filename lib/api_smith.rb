@@ -1,6 +1,6 @@
 module APISmith
   
-  require 'api_smash/smash'
-  require 'api_smash/base'
+  require 'api_smith/smash'
+  require 'api_smith/base'
   
 end
