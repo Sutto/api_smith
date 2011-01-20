@@ -1,3 +1,9 @@
+GIT
+  remote: git://github.com/thefrontiergroup/hashie.git
+  revision: ef366e25b60955bbbf61b28febafe5c5e95b8cdc
+  specs:
+    hashie (0.4.0)
+
 PATH
   remote: .
   specs:
@@ -12,15 +18,23 @@ GEM
     addressable (2.2.2)
     columnize (0.3.2)
     crack (0.1.8)
+    daemons (1.0.10)
     diff-lcs (1.1.2)
     fuubar (0.0.3)
       rspec (~> 2.0)
       rspec-instafail (~> 0.1.4)
       ruby-progressbar (~> 0.0.9)
-    hashie (0.4.0)
-    httparty (0.6.1)
+    gem_plugin (0.2.3)
+    httparty (0.7.1)
       crack (= 0.1.8)
+      crack (= 0.1.8)
+      httparty
+      mongrel (= 1.2.0.pre2)
+    json (1.4.6)
     linecache (0.43)
+    mongrel (1.2.0.pre2)
+      daemons (~> 1.0.10)
+      gem_plugin (~> 0.2.3)
     rr (1.0.2)
     rspec (2.4.0)
       rspec-core (~> 2.4.0)
@@ -48,8 +62,8 @@ DEPENDENCIES
   ZenTest
   api_smith!
   fuubar
-  hashie
-  httparty
+  hashie!
+  json
   rr
   rspec (~> 2.0)
   ruby-debug
