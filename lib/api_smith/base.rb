@@ -1,6 +1,12 @@
 require 'httparty'
 
 module APISmith
+  # A base class for building api clients (with a specified endpoint and general
+  # shared options) on top of HTTParty, including response unpacking and
+  # transformation.
+  #
+  # @author Darcy Laycock
+  # @author Steve Webb
   class Base
     include HTTParty
     
@@ -27,8 +33,8 @@ module APISmith
       request! :delete, path, options, :query
     end
     
-    protected
-    
+  protected
+
     def request!(method, path, options, *param_types)
       full_path = path_for(path)
       request_options = merged_options_for(:request, options)
