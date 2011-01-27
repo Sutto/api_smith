@@ -57,6 +57,7 @@ GEM
     webmock (1.6.1)
       addressable (>= 2.2.2)
       crack (>= 0.1.7)
+    will_paginate (2.3.15)
     yard (0.6.4)
 
 PLATFORMS
@@ -75,4 +76,5 @@ DEPENDENCIES
   rspec (~> 2.0)
   ruby-debug
   webmock
+  will_paginate
   yard
