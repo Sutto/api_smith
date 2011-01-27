@@ -1,2 +1,3 @@
 *.json
 lib/.yardoc/*
+examples/keys.rb

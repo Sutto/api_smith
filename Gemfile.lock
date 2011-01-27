@@ -16,6 +16,8 @@ GEM
   specs:
     ZenTest (4.4.2)
     addressable (2.2.2)
+    awesome_print (0.3.1)
+    bluecloth (2.0.10)
     columnize (0.3.2)
     crack (0.1.8)
     daemons (1.0.10)
@@ -35,6 +37,7 @@ GEM
     mongrel (1.2.0.pre2)
       daemons (~> 1.0.10)
       gem_plugin (~> 0.2.3)
+    rdoc (3.4)
     rr (1.0.2)
     rspec (2.4.0)
       rspec-core (~> 2.4.0)
@@ -54,6 +57,7 @@ GEM
     webmock (1.6.1)
       addressable (>= 2.2.2)
       crack (>= 0.1.7)
+    yard (0.6.4)
 
 PLATFORMS
   ruby
@@ -61,10 +65,14 @@ PLATFORMS
 DEPENDENCIES
   ZenTest
   api_smith!
+  awesome_print
+  bluecloth
   fuubar
   hashie!
   json
+  rdoc
   rr
   rspec (~> 2.0)
   ruby-debug
   webmock
+  yard
