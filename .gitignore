@@ -1,3 +1,5 @@
 *.json
 lib/.yardoc/*
 examples/keys.rb
+pkg
+rdoc
