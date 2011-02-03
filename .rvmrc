@@ -1,1 +1,1 @@
-rvm 1.8.7@experimentalapi --create 
+rvm ree@api_smith --create

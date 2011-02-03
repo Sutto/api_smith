@@ -1,7 +1,6 @@
 # -*- encoding: utf-8 -*-
 lib = File.expand_path('../lib/', __FILE__)
 $:.unshift lib unless $:.include?(lib)
- 
 require 'api_smith/version'
  
 Gem::Specification.new do |s|
