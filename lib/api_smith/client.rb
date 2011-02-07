@@ -35,8 +35,8 @@ module APISmith
       private
 
       def request!(method, path, options, *param_types)
-        full_path = path_for(path)
         request_options = merged_options_for(:request, options)
+        full_path = request_options[:skip_endpoint] ? path : path_for(path)
         param_types.each do |type|
           request_options[type] = merged_options_for(type, options)
         end
