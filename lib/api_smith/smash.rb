@@ -14,6 +14,26 @@ module APISmith
   #
   # @author Darcy Laycock
   # @author Steve Webb
+  #
+  # @example a simple, structured object with the most common use cases.
+  #   class MyResponse < APISmith::Smash
+  #     property :full_name, :from => :fullName
+  #     property :value_percentage, :transformer => :to_f
+  #     property :short_name
+  #     property :created, :transformer => lambda { |v| Date.parse(v) }
+  #   end
+  #
+  #   response = MyResponse.new({
+  #     :fullName         => "Bob Smith",
+  #     :value_percentage => "10.5",
+  #     :short_name       => 'Bob',
+  #     :created          => '2010-12-28'
+  #   })
+  #
+  #   p response.short_name # => "Bob"
+  #   p response.full_name # => "Bob Smith"
+  #   p response.value_percentage # => 10.5
+  #   p response.created.class # => Date
   class Smash < Hashie::Dash
     # When we access an unknown property, we raise the unknown key instead of
     # a NoMethodError on undefined keys so that we can do a target rescue.
