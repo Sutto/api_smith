@@ -3,7 +3,6 @@ source :rubygems
 gemspec
 
 gem "json"
-gem "will_paginate"
 
 group :development do
   gem "bluecloth"

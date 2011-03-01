@@ -34,6 +34,7 @@ module APISmith
   #   p response.full_name # => "Bob Smith"
   #   p response.value_percentage # => 10.5
   #   p response.created.class # => Date
+  #
   class Smash < Hashie::Dash
     # When we access an unknown property, we raise the unknown key instead of
     # a NoMethodError on undefined keys so that we can do a target rescue.
@@ -70,6 +71,7 @@ module APISmith
     def self.exception_on_unknown_key=(value)
       @exception_on_unknown_key = value
     end
+    self.exception_on_unknown_key = false
 
     # Sets the transformer that is invoked when the given key is set.
     #
