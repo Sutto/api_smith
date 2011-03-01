@@ -7,8 +7,8 @@
 # @author Darcy Laycock
 # @author Steve Webb
 module APISmith
-  VERSION = "0.0.1".freeze
 
+  require 'api_smith/version'
   require 'api_smith/smash'
   require 'api_smith/client'
   require 'api_smith/base'
