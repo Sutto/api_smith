@@ -136,14 +136,21 @@ describe APISmith::Smash do
       my_smash.exception_on_unknown_key = true
       my_smash.exception_on_unknown_key?.should be_true
       expect do
-        my_smash.new(:name => 'Test')
-      end.should raise_error(NoMethodError)
+        my_smash.new[:name] = 'Test'
+      end.to raise_error(NoMethodError)
+      expect do
+        my_smash.new[:name]
+      end.to raise_error(NoMethodError)
       my_smash.exception_on_unknown_key?.should be_true
     end
 
     it 'should default to ignoring unknown key errors' do
       klass = Class.new(APISmith::Smash)
       klass.exception_on_unknown_key?.should be_false
+      expect do
+        klass.new[:my_imaginary_key] = 'of doom'
+        klass.new[:my_imaginary_key]
+      end.to_not raise_error(NoMethodError)
     end
 
     it 'should include aliases in :from when checking if properties are valid' do
@@ -183,6 +190,21 @@ describe APISmith::Smash do
       instance.last.should be_a(my_smash)
       instance.last.name.should == 'Rick'
       instance.last.age.should == 19
+    end
+
+    it 'should return nil for unknown types' do
+      my_smash.call(100).should be_nil
+      my_smash.call(nil).should be_nil
+      my_smash.call("Oh look, a pony!").should be_nil
+    end
+
+    it 'should return itself when passed in' do
+      instance = my_smash.new(:name => "Bob", :age => 18)
+      transformed = my_smash.call(instance)
+      transformed.should_not be_nil
+      transformed.should be_kind_of my_smash
+      transformed.name.should == "Bob"
+      transformed.age.should == 18
     end
 
   end

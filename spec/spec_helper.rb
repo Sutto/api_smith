@@ -1,5 +1,7 @@
 ENV["RAILS_ENV"] ||= 'test'
 
+require 'rspec'
+
 require 'pathname'
 require 'bundler/setup'
 
