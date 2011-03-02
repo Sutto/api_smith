@@ -249,10 +249,12 @@ module APISmith
       #   from, e.g. ["a", 1, "b"], %w(a 2 3) or something else.
       def extract_response(path, response, options)
         # First, get the response container options
-        response_container = options.fetch(:response_container, default_response_container(path, options))
+        response_container = options.fetch(:response_container) do
+          default_response_container(path, options)
+        end
         # And then unpack then
         if response_container
-          response_keys = Array(options[:response_container])
+          response_keys = Array(response_container)
           response = response_keys.inject(response) do |r, key|
             r.respond_to?(:[]) ? r[key] : r
           end
@@ -265,10 +267,12 @@ module APISmith
       # @param [Hash, Array] response the object returned from the api call
       # @param [Hash] options the options passed to the api call
       # @option options [#call] :transform If present, passed the unpack response.
+      # @option option [#call] :transformer see the :transform option
       # @return [Object] the transformed response, or the response itself if no :transform
       #   option is passed.
       def transform_response(response, options)
-        if (transformer = options[:transform])
+        transformer = options[:transform] || options[:transformer]
+        if transformer
           transformer.call response
         else
           response
