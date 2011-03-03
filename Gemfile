@@ -17,7 +17,7 @@ group :test do
   gem 'rb-fsevent'
   gem 'growl'
   gem 'rcov', :require => nil
-  gem 'ci_reporter', '~>1.6.3'
+  gem 'ci_reporter', '~>1.6.3', :require => nil
   gem 'sham_rack'
   gem 'sinatra' # for sham_rack
 end
