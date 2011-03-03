@@ -14,4 +14,13 @@ describe APISmith::Base do
     APISmith::Base.should be < HTTParty
   end
 
+  it 'should work in classes with arguments on their initializer' do
+    klass = Class.new(APISmith::Base) do
+      def initialize(options = {})
+        super
+      end
+    end
+    expect { klass.new }.to_not raise_error(ArgumentError)
+  end
+
 end

@@ -11,5 +11,9 @@ module APISmith
   # @author Steve Webb
   class Base
     include APISmith::Client
+
+    def initialize(*)
+    end
+
   end
 end
