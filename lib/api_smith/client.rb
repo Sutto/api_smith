@@ -94,6 +94,8 @@ module APISmith
       # @option options [#call] :transform An object, invoked via #call, that takes the response and
       #   transformers it into a useable form.
       #
+      # @return the response, defaults to the raw HTTParty::Response
+      #
       # @see #path_for
       # @see #extract_response
       # @see #transform_response
@@ -109,11 +111,10 @@ module APISmith
         end
         # Finally, use HTTParty to get the response
         response = self.class.send method, full_path, request_options
-        parsed_response = response.parsed_response
         # Pre-process the response to check for errors.
-        check_response_errors parsed_response
+        check_response_errors response
         # Unpack the response using the :response_container option
-        inner_response = extract_response path, parsed_response, options
+        inner_response = extract_response path, response, options
         # Finally, apply any transformations
         transform_response inner_response, options
       end

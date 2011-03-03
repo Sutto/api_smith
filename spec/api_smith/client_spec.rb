@@ -27,6 +27,11 @@ describe APISmith::Client do
     client.delete('/echo').should == {"verb" => "delete", "echo" => nil}
   end
 
+  it 'should default to returning a httparty response' do
+    response = client.get('/echo')
+    response.class.should == HTTParty::Response
+  end
+
   describe 'passing options' do
 
     it 'should allow you to pass extra query string options' do
