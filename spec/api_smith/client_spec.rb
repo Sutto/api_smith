@@ -39,6 +39,11 @@ describe APISmith::Client do
       response["echo"].should == "Hello"
     end
 
+    it 'should work with ampersands as expected' do
+      response = client.get('/echo', :extra_query => {:echo => "a & b"})
+      response["echo"].should == "a & b"
+    end
+
     it 'should allow you to pass extra body options' do
       response = client.post('/echo', :extra_body => {:echo => "Hello"})
       response["echo"].should == "Hello"
