@@ -129,7 +129,7 @@ objects you care about.
 ## Contributors
 
 API Smith was written by [Darcy Laycock](http://github.com/sutto) and [Steve Webb](http://github.com/swebb)
-from [The Frontier Group](http://github.com/thefrontiergroup) and funded by [Jammbox](http://github.com/jammbox).
+from [The Frontier Group](http://github.com/thefrontiergroup) and funded by [Filter Squad](http://github.com/filtersquad).
 
 ## Contributing
 
@@ -148,4 +148,4 @@ Other than that, our guidelines very closely match the GemCutter guidelines [her
 ## License
 
 API Smith is released under the MIT License (see the [license file](LICENSE)) and is
-copyright Jammbox, 2011.
+copyright Filter Squad, 2011.
