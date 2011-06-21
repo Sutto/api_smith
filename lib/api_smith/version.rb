@@ -1,4 +1,4 @@
 module APISmith
   # The current version of API Smith
-  VERSION = "0.0.1".freeze
+  VERSION = "1.0.0".freeze
 end
