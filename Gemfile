@@ -5,6 +5,7 @@ gemspec
 gem 'json'
 
 group :development do
+  gem 'rake'
   gem 'bluecloth'
   gem 'yard'
   gem 'ruby-debug'
