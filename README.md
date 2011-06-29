@@ -128,8 +128,8 @@ objects you care about.
   
 ## Contributors
 
-API Smith was written by [Darcy Laycock](http://github.com/sutto) and [Steve Webb](http://github.com/swebb)
-from [The Frontier Group](http://github.com/thefrontiergroup) and funded by [Filter Squad](http://github.com/filtersquad).
+API Smith was written by [Darcy Laycock](http://github.com/sutto), and [Steve Webb](http://github.com/swebb)
+from [The Frontier Group](http://github.com/thefrontiergroup), as part of a bigger project with [Filter Squad](http://github.com/filtersquad).
 
 ## Contributing
 
