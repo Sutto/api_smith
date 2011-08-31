@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    api_smith (0.0.1)
+    api_smith (1.0.0)
       hashie (~> 1.0)
       httparty
 

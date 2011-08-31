@@ -13,7 +13,9 @@ module APISmith
       subject.is_a?(Class) ? subject : subject.class
     end
 
-    # Returns an instance of the subject class, created via allocate (vs. new)
+    # Returns an instance of the subject class, created via allocate (vs. new). Useful
+    # for giving access to utility methods used inside of the class without having to\
+    # initialize a new client.
     # @return [Object] the instance
     def subject_class_instance
       @subject_class_instance ||= subject_api_class.allocate
@@ -35,7 +37,7 @@ module APISmith
     # @param [String] the relative path for the api
     # @return [Object] the result from stub_request
     def stub_api(type, path)
-      stub_request(type, api_url_for(path))
+      stub_request type, api_url_for(path)
     end
 
   end
