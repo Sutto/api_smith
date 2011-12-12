@@ -11,6 +11,24 @@ describe APISmith::Client do
 
   let(:client) { client_klass.new }
 
+  it 'should let you provide instrumentation' do
+    second_klass = Class.new(client_klass) do
+      attr_accessor :hits
+      def instrument_request(*args)
+        (self.hits ||= []) << args
+        yield if block_given?
+      end
+    end
+    client = second_klass.new
+    client.get('/echo')
+    hits = client.hits
+    hits.should_not be_nil
+    hits.should_not be_empty
+    hit = hits.first
+    hit[0].should == :get
+    hit[1].should include "/echo"
+  end
+
   it 'should allow you to perform get requests' do
     client.get('/echo').should == {"verb" => "get", "echo" => nil}
   end

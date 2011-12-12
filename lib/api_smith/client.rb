@@ -110,7 +110,10 @@ module APISmith
           request_options[type] = merged_options_for(type, options)
         end
         # Finally, use HTTParty to get the response
-        response = self.class.send method, full_path, request_options
+        response = nil
+        instrument_request method, full_path, options do
+          response = self.class.send method, full_path, request_options
+        end
         # Pre-process the response to check for errors.
         check_response_errors response
         # Unpack the response using the :response_container option
@@ -120,6 +123,15 @@ module APISmith
       end
 
       private
+
+      # Provides a hook developers can utilitise to implement logging / instrumentation.
+      # @param [Symbol] method the HTTP method to use
+      # @param [String] full_path the full path being hit
+      # @param [Hash] options an options being passed to the request
+      # @param [#call] the block to invoke it with.
+      def instrument_request(method, full_path, options)
+        yield if block_given?
+      end
 
       # Provides a hook to handle checking errors on API responses. This is called
       # post-fetch and pre-unpacking / transformation. It is passed the apis response
