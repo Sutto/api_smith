@@ -1,1 +1,1 @@
-rvm ree@api_smith --create
+rvm use ree@api_smith --create
