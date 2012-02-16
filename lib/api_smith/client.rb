@@ -1,6 +1,8 @@
 require 'httparty'
+require 'net/http/persistent'
 
 module APISmith
+
   # A mixin providing the base set of functionality for building API clients.
   #
   # @see InstanceMethods
@@ -323,6 +325,24 @@ module APISmith
       #   endpoint nil
       def endpoint(value = nil)
         define_method(:endpoint) { value }
+      end
+
+      # Allows you to set a given endpoint as persistnet, using Net::HTTP::Persistent.
+      # @param [true,false] value when true, will be persisted. Otherwise, non-persistent.
+      # @param [String] name the name for the client in Net::HTTP::Persistent
+      # @example Making it persistent:
+      #   persistent
+      # @example Persistent with a custom client name
+      #   persistent true, 'my-client'
+      # @example Making it non-persistent
+      #   persistent false
+      def persistent(value = true, name = 'api_smith')
+        if value
+          require 'api_smith/httparty_extensions'
+          default_options[:persistent] ||= Net::HTTP::Persistent.new(name)
+        else
+          default_options[:persistent] = nil
+        end
       end
 
     end
