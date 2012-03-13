@@ -112,9 +112,8 @@ module APISmith
           request_options[type] = merged_options_for(type, options)
         end
         # Finally, use HTTParty to get the response
-        response = nil
-        instrument_request method, full_path, options do
-          response = self.class.send method, full_path, request_options
+        response = instrument_request method, full_path, options do
+          self.class.send method, full_path, request_options
         end
         # Pre-process the response to check for errors.
         check_response_errors response

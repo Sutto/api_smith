@@ -12,6 +12,20 @@ describe APISmith::Client do
 
   let(:client) { client_klass.new }
 
+  describe 'instrumentation' do
+    subject do
+      Class.new(client_klass) do
+        def instrument_request(*args)
+          'custom_response'
+        end
+      end.new
+    end
+
+    it 'should allow you to customize reponse' do
+      subject.get('/echo').should == 'custom_response'
+    end
+  end
+
   it 'should let you provide instrumentation' do
     second_klass = Class.new(client_klass) do
       attr_accessor :hits
