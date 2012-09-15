@@ -6,7 +6,6 @@ describe APISmith::Client do
     Class.new do
       include APISmith::Client
       base_uri "http://sham.local"
-      persistent
     end
   end
 
