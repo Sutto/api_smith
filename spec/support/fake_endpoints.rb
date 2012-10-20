@@ -1,6 +1,4 @@
-require 'sham_rack'
-
-ShamRack.at("sham.local").sinatra do
+class TestApplication < Sinatra::Application
 
   def json!(response)
     content_type "application/json"
@@ -8,50 +6,52 @@ ShamRack.at("sham.local").sinatra do
   end
 
   get '/simple' do
-    json! :name => "Darcy"
+    json! name: "Darcy"
   end
 
   get '/nested' do
-    json! :response => {
-      :name => "Steve"
+    json! response: {
+      name: "Steve"
     }
   end
 
   get '/collection' do
-    json! :response => [
-      {:name => "Bob"},
-      {:name => "Reginald"}
+    json! response: [
+      {name: "Bob"},
+      {name: "Reginald"}
     ]
   end
 
   get '/a' do
-    json! :a => "outer"
+    json! a: "outer"
   end
 
   get '/namespaced/a' do
-    json! :a => "namespaced"
+    json! a: "namespaced"
   end
 
   get '/namespaced/test' do
-    json! :response => {:age => 20, :name => "Roger"}
+    json! response: {age: 20, name: "Roger"}
   end
 
   get '/namespaced/complex' do
-    json! :response => {
-      :data => [{
-        :inner => {:name => 'Charles', :secret_identity => true}
+    json! response: {
+      data: [{
+        inner: {name: 'Charles', secret_identity: true}
       }]
     }
   end
 
   %w(get post put delete).each do |verb|
     send(verb, '/echo') do
-      json! :verb => verb, :echo => params[:echo]
+      json! verb: verb, echo: params[:echo]
     end
   end
 
   get '/erroring' do
-    json! :error_name => 'Totally confused.'
+    json! error_name: 'Totally confused.'
   end
 
 end
+
+Faraday.default_adapter = [:rack, TestApplication.new]

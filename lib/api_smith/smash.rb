@@ -17,17 +17,17 @@ module APISmith
   #
   # @example a simple, structured object with the most common use cases.
   #   class MyResponse < APISmith::Smash
-  #     property :full_name, :from => :fullName
-  #     property :value_percentage, :transformer => :to_f
+  #     property :full_name, from: :fullName
+  #     property :value_percentage, transformer: :to_f
   #     property :short_name
-  #     property :created, :transformer => lambda { |v| Date.parse(v) }
+  #     property :created, transformer: lambda { |v| Date.parse(v) }
   #   end
   #
   #   response = MyResponse.new({
-  #     :fullName         => "Bob Smith",
-  #     :value_percentage => "10.5",
-  #     :short_name       => 'Bob',
-  #     :created          => '2010-12-28'
+  #     fullName:         "Bob Smith",
+  #     value_percentage: "10.5",
+  #     short_name:       'Bob',
+  #     created:          '2010-12-28'
   #   })
   #
   #   p response.short_name # => "Bob"

@@ -83,7 +83,7 @@ and to set them. For class-level options, simply define a `base_#{type}_options`
 e.g:
 
     def base_query_options
-      {:format => 'json'}
+      {format: 'json'}
     end
 
 For per-instance options, simply use the `add_#{type}_options!` method (which takes
@@ -91,7 +91,7 @@ a hash of options). For example, see `APISmith::Client::InstanceMethods#add_quer
 
 Finally, you can use the `:extra_#{type}` options (e.g. `:extra_query`), for example:
 
-    get '/', :extra_query => {:before_timestamp => 2.weeks.ago.to_s}
+    get '/', extra_query: {before_timestamp: 2.weeks.ago.to_s}
 
 ### Response Unpacking
 
@@ -111,7 +111,7 @@ process. As an example, say your api returns:
 Via the `:response_container` option, when your transformer is called, it wont have to deal with the data and values keys,
 You will only need to deal with the contents directly, in this case - `"some-other-data-here"`, simply by passing:
 
-    :response_container => %w(data values)
+    response_container: %w(data values)
 
 ### Simple Response Transformations
 

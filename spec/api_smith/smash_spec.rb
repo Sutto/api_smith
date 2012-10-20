@@ -32,13 +32,13 @@ describe APISmith::Smash do
 
     it 'should let you define a transformer via the :transformer property option' do
       my_smash.transformers['name'].should be_nil
-      my_smash.property :name, :transformer => lambda { |v| v.to_s.upcase }
+      my_smash.property :name, transformer: lambda { |v| v.to_s.upcase }
       my_smash.transformers['name'].should_not be_nil
       my_smash.transformers['name'].call('a').should == 'A'
     end
 
     it 'should automatically transform the incoming value' do
-      my_smash.property :count, :transformer => lambda { |v| v.to_i }
+      my_smash.property :count, transformer: lambda { |v| v.to_i }
       instance = my_smash.new
       instance.count = '1'
       instance.count.should == 1
@@ -49,18 +49,18 @@ describe APISmith::Smash do
   describe 'key transformations' do
 
     it 'should let you specify it via from' do
-      my_smash.property :name, :from => :fullName
+      my_smash.property :name, from: :fullName
       my_smash.key_mapping['fullName'].should == 'name'
-      my_smash.new(:fullName => 'Bob').name.should == 'Bob'
+      my_smash.new(fullName: 'Bob').name.should == 'Bob'
     end
 
     it 'should alias it for reading' do
-      my_smash.property :name, :from => :fullName
-      my_smash.new(:name => 'Bob')[:fullName].should == 'Bob'
+      my_smash.property :name, from: :fullName
+      my_smash.new(name: 'Bob')[:fullName].should == 'Bob'
     end
 
     it 'should alias it for writing' do
-      my_smash.property :name, :from => :fullName
+      my_smash.property :name, from: :fullName
       instance = my_smash.new
       instance[:fullName] = 'Bob'
       instance.name.should == 'Bob'
@@ -84,7 +84,7 @@ describe APISmith::Smash do
     it 'should not overwrite parent class key mapping' do
       parent_smash.key_mapping['b'].should be_nil
       client_smash.key_mapping['b'].should be_nil
-      client_smash.property :a, :from => :b
+      client_smash.property :a, from: :b
       parent_smash.key_mapping['b'].should be_nil
       client_smash.key_mapping['b'].should_not be_nil
     end
@@ -126,7 +126,7 @@ describe APISmith::Smash do
       my_smash.properties.should_not include(:name)
       my_smash.exception_on_unknown_key?.should be_false
       expect do
-        my_smash.new(:name => 'Test')
+        my_smash.new(name: 'Test')
       end.should_not raise_error
       my_smash.exception_on_unknown_key?.should be_false
     end
@@ -156,7 +156,7 @@ describe APISmith::Smash do
     it 'should include aliases in :from when checking if properties are valid' do
       my_smash.should_not be_property(:name)
       my_smash.should_not be_property(:fullName)
-      my_smash.property :name, :from => :fullName
+      my_smash.property :name, from: :fullName
       my_smash.should be_property(:name)
       my_smash.should be_property(:fullName)
     end
@@ -167,7 +167,7 @@ describe APISmith::Smash do
 
     before :each do
       my_smash.property :name
-      my_smash.property :age, :transformer => :to_i
+      my_smash.property :age, transformer: :to_i
     end
 
     it 'should respond to call' do
@@ -175,14 +175,14 @@ describe APISmith::Smash do
     end
 
     it 'should correctly transform a hash' do
-      instance = my_smash.call(:name => 'Bob', :age => '18')
+      instance = my_smash.call(name: 'Bob', age: '18')
       instance.should be_a(my_smash)
       instance.name.should == 'Bob'
       instance.age.should == 18
     end
 
     it 'should correctly transform an array' do
-      instance = my_smash.call([{:name => 'Bob', :age => '18'}, {:name => 'Rick', :age => '19'}])
+      instance = my_smash.call([{name: 'Bob', age: '18'}, {name: 'Rick', age: '19'}])
       instance.should be_a(Array)
       instance.first.should be_a(my_smash)
       instance.first.name.should == 'Bob'
@@ -199,7 +199,7 @@ describe APISmith::Smash do
     end
 
     it 'should return itself when passed in' do
-      instance = my_smash.new(:name => "Bob", :age => 18)
+      instance = my_smash.new(name: "Bob", age: 18)
       transformed = my_smash.call(instance)
       transformed.should_not be_nil
       transformed.should be_kind_of my_smash

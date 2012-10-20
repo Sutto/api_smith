@@ -1,1 +1,1 @@
-rvm use ree@api_smith --create
+rvm use 1.9.3@api_smith --create

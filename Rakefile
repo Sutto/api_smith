@@ -18,7 +18,7 @@ end
 
 
 desc 'Clear out YARD docs and generated packages'
-task :clean => [:clobber_package, :clobber_doc]
+task clean: [:clobber_package, :clobber_doc]
 
 begin
   require 'yard'
@@ -35,7 +35,7 @@ begin
 rescue LoadError
 end
 
-task :default => :spec
+task default: :spec
 
 desc "Run all specs in spec directory (excluding plugin specs)"
 RSpec::Core::RakeTask.new(:spec)

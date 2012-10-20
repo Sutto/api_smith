@@ -5,7 +5,7 @@ require 'api_smith/version'
 
 Gem::Specification.new do |s|
   s.name        = "api_smith"
-  s.version     = APISmith::VERSION
+  s.version     = APISmith::VERSION.dup
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["Darcy Laycock"]
   s.email       = ["sutto@sutto.net"]

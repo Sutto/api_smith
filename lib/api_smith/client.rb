@@ -1,5 +1,7 @@
 require 'faraday'
 
+require 'api_smith/middleware/json_decoder'
+
 module APISmith
 
   # A mixin providing the base set of functionality for building API clients.
@@ -112,7 +114,14 @@ module APISmith
         # Finally, use HTTParty to get the response
         response = nil
         instrument_request method, full_path, options do
-          response = self.class.send method, full_path, request_options
+          response = connection.send(method, full_path, request_options[:query] || {}) do |req|
+            if (body = request_options[:body]) && !body.empty?
+              req.body = body
+            end
+            if (headers = request_options[:headers]) && !headers.empty?
+              req.headers.update headers
+            end
+          end.body
         end
         # Pre-process the response to check for errors.
         check_response_errors response
@@ -165,7 +174,7 @@ module APISmith
       #
       # @example
       #   def base_body_options
-      #     {:format => 'json'}
+      #     {format: 'json'}
       #   end
       #
       def base_body_options
@@ -181,7 +190,7 @@ module APISmith
       #
       # @example
       #   def base_query_options
-      #     {:format => 'json'}
+      #     {format: 'json'}
       #   end
       #
       def base_query_options
@@ -321,8 +330,10 @@ module APISmith
         # The default stack is pretty simple.
         connection.request  :url_encoded
         connection.response :api_smith_json
-        connection.adapter Faraday.default_adapter
+        connection.adapter  *Faraday.default_adapter
       end
+
+      def base_uri; self.class.base_uri; end
 
     end
 
@@ -337,6 +348,20 @@ module APISmith
       #   endpoint nil
       def endpoint(value = nil)
         define_method(:endpoint) { value }
+      end
+
+      def base_uri(value = (getter = true; nil))
+        getter ||= false
+        @base_uri ||= nil
+        if getter
+          if @base_uri
+            @base_uri
+          else
+            superclass.respond_to?(:base_uri) ? superclass.base_uri : nil
+          end
+        else
+          @base_uri = value
+        end
       end
 
     end

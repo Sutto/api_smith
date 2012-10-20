@@ -12,4 +12,5 @@ end
 
 group :test do
   gem 'sinatra'
+  gem 'rack-test'
 end
