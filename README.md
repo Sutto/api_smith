@@ -2,11 +2,8 @@
 
 API Smith makes building clients for HTTP-based APIs easy.
 
-By building on top of HTTParty and Hashie, API Smith provides tools tailor-made for making API
-clients for structured data - That is, responses with a well defined design. These tools are
-made possible by two parts - APISmith::Smash, a smarter dash / hash-like object which lets
-you have simple declarative data structures and APISmith::Client, a layer on top of HTTParty
-that makes dealing with APIs even simpler and more consistent.
+**Please note:** This branch contains API Smith v2.0, which will only
+run on Ruby 1.9.3+.
 
 ## APISmith::Smash - A Smarter Hash
 
@@ -62,7 +59,7 @@ Using this in your client is as simple as calling the `endpoint` class method - 
       base_uri "http://example.com/"
       endpoint "api/v1"
     end
-    
+
 Then, calling `MyAPIClient.new.get('/blah')` will hit up the url at `http://example.com/api/v1/blah`.
 
 This is most importantly useful when dealing with restful - `base_uri` can point to the site root and
@@ -95,7 +92,7 @@ a hash of options). For example, see `APISmith::Client::InstanceMethods#add_quer
 Finally, you can use the `:extra_#{type}` options (e.g. `:extra_query`), for example:
 
     get '/', :extra_query => {:before_timestamp => 2.weeks.ago.to_s}
-    
+
 ### Response Unpacking
 
 Via the `:response_container` argument to the `get`, `post`, `put` and `delete` methods, API Smith
@@ -110,7 +107,7 @@ process. As an example, say your api returns:
         "values": "some-other-data-here"
       }
     }
-    
+
 Via the `:response_container` option, when your transformer is called, it wont have to deal with the data and values keys,
 You will only need to deal with the contents directly, in this case - `"some-other-data-here"`, simply by passing:
 
@@ -125,7 +122,7 @@ the `:transformer` option on Smash properties, Adding `:transform` with a `#call
 As an added bonus, because APISmith::Smash defines a `call` class method, you can then simply pass one
 of your Smash subclasses to the transform option and API Smith will intelligently unpack your data into the
 objects you care about.
-  
+
 ## Contributors
 
 API Smith was written by [Darcy Laycock](http://github.com/sutto), and [Steve Webb](http://github.com/swebb)

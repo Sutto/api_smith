@@ -1,5 +1,4 @@
-require 'httparty'
-require 'net/http/persistent'
+require 'faraday'
 
 module APISmith
 
@@ -13,12 +12,11 @@ module APISmith
   # @author Steve Webb
   module Client
 
-    # Hooks into the mixin process to add HTTParty and the two APISmith::Client
+    # Hooks into the mixin process to add the two APISmith::Client
     # components to the given parent automatically.
     # @param [Class] parent the object this is being mixed into
     def self.included(parent)
       parent.class_eval do
-        include HTTParty
         include InstanceMethods
         extend  ClassMethods
       end
@@ -312,6 +310,20 @@ module APISmith
         nil
       end
 
+      # Creates a connection using the default information.
+      def connection
+        @connection ||= Faraday.new(base_uri) do |c|
+          configure_faraday_connection c
+        end
+      end
+
+      def configure_faraday_connection(connection)
+        # The default stack is pretty simple.
+        connection.request  :url_encoded
+        connection.response :api_smith_json
+        connection.adapter Faraday.default_adapter
+      end
+
     end
 
     # Class level methods to let you configure your api client.
@@ -325,24 +337,6 @@ module APISmith
       #   endpoint nil
       def endpoint(value = nil)
         define_method(:endpoint) { value }
-      end
-
-      # Allows you to set a given endpoint as persistnet, using Net::HTTP::Persistent.
-      # @param [true,false] value when true, will be persisted. Otherwise, non-persistent.
-      # @param [String] name the name for the client in Net::HTTP::Persistent
-      # @example Making it persistent:
-      #   persistent
-      # @example Persistent with a custom client name
-      #   persistent true, 'my-client'
-      # @example Making it non-persistent
-      #   persistent false
-      def persistent(value = true, name = 'api_smith')
-        if value
-          require 'api_smith/httparty_extensions'
-          default_options[:persistent] ||= Net::HTTP::Persistent.new(name)
-        else
-          default_options[:persistent] = nil
-        end
       end
 
     end

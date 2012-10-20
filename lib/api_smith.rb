@@ -11,6 +11,5 @@ module APISmith
   require 'api_smith/version'
   require 'api_smith/smash'
   require 'api_smith/client'
-  require 'api_smith/base'
 
 end
