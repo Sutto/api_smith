@@ -112,7 +112,7 @@ module APISmith
         end
         # Finally, use HTTParty to get the response
         response = instrument_request method, full_path, options do
-          self.class.send method, full_path, request_options
+          self.class.send method, full_path, options
         end
         # Pre-process the response to check for errors.
         check_response_errors response
