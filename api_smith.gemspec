@@ -19,7 +19,6 @@ Gem::Specification.new do |s|
 
   s.add_development_dependency 'rr'
   s.add_development_dependency 'rspec', '~> 2.0'
-  s.add_development_dependency 'fuubar'
 
   s.files        = Dir.glob("{lib}/**/*")
   s.require_path = 'lib'

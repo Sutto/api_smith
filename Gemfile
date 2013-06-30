@@ -7,8 +7,6 @@ gem 'json'
 
 group :development do
   gem 'rake'
-  gem 'bluecloth'
-  gem 'yard'
   gem 'awesome_print'
 end
 
