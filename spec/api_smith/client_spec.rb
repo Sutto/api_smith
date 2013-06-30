@@ -167,7 +167,7 @@ describe APISmith::Client do
 
     it 'should use .call on the transformer' do
       transformer = Object.new
-      mock(transformer).call({"name" => "Darcy"}) { 42 }
+      mock(transformer).call(rr_satisfy { |x| x.to_hash == {"name" => "Darcy"}}) { 42 }
       response = client.get('/simple', :transform => transformer)
       response.should == 42
     end
@@ -206,7 +206,7 @@ describe APISmith::Client do
     end
 
     it 'should do it before unpack the response' do
-      mock(client).check_response_errors("response" => {"name" => "Steve"})
+      mock(client).check_response_errors(rr_satisfy { |x| x.to_hash == {"response" => {"name" => "Steve"}} })
       client.get('/nested', :response_container => %w(response))
     end
 
