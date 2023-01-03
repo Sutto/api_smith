@@ -10,13 +10,13 @@ GEM
   specs:
     awesome_print (0.4.0)
     diff-lcs (1.1.2)
-    hashie (2.0.5)
-    httparty (0.11.0)
-      multi_json (~> 1.0)
+    hashie (1.2.0)
+    httparty (0.21.0)
+      mini_mime (>= 1.0.0)
       multi_xml (>= 0.5.2)
     json (1.5.3)
-    multi_json (1.7.7)
-    multi_xml (0.5.4)
+    mini_mime (1.1.2)
+    multi_xml (0.6.0)
     rack (1.3.0)
     rake (10.1.0)
     rr (1.0.2)
@@ -41,7 +41,7 @@ PLATFORMS
 DEPENDENCIES
   api_smith!
   awesome_print
-  hashie (~> 2.0)
+  hashie (~> 1.0)
   json
   rake
   rr
